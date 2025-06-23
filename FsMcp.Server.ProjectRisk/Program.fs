@@ -5,6 +5,47 @@ open FsMcp.Server.ProjectRisk.Data.Preparation
 
 module Test =
     
+    
+    let createProjectTypesTableSql =
+        """
+        CREATE TABLE project_types
+        AS 
+        SELECT DISTINCT project_type
+        FROM _raw;
+        """
+    
+    let createProjectMethodologiesTable =
+        """
+        CREATE TABLE project_methodologies
+        AS 
+        SELECT DISTINCT methodology_used
+        FROM _raw;
+        """
+        
+    let createTeamExpereinceLevelsTable =
+        """
+        CREATE TABLE team_experience_levels
+        AS 
+        SELECT DISTINCT team_experience_level
+        FROM _raw;
+        """
+        
+    let createProjectPhasesTable =
+        """
+        CREATE TABLE project_phases
+        AS 
+        SELECT DISTINCT project_phase
+        FROM _raw;
+        """
+        
+    let createRequirementStabilitiyTypesTable =
+        """
+        CREATE TABLE requirement_stability_types
+        AS 
+        SELECT DISTINCT requirement_stability
+        FROM _raw;
+        """
+    
     let run _ =
         let (rows, errors) =
             CsvParser.parseFileV2<FsMcp.Server.ProjectRisk.Data.Preparation.Common.RawValue> true "C:\\Users\\mclif\\Downloads\\archive (2)\\project_risk_raw_dataset.csv"
@@ -16,6 +57,12 @@ module Test =
         
         rows
         |> List.iter (fun value -> ctx.Insert<RawValue>("_raw", value))
+        
+        ctx.ExecuteSqlNonQuery(createProjectTypesTableSql) |> ignore
+        ctx.ExecuteSqlNonQuery(createProjectMethodologiesTable) |> ignore
+        ctx.ExecuteSqlNonQuery(createTeamExpereinceLevelsTable) |> ignore
+        ctx.ExecuteSqlNonQuery(createProjectPhasesTable) |> ignore
+        ctx.ExecuteSqlNonQuery(createRequirementStabilitiyTypesTable) |> ignore
         
         ()
         
