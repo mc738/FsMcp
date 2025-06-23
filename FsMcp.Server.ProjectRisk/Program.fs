@@ -38,13 +38,23 @@ module Test =
         FROM _raw;
         """
         
-    let createRequirementStabilitiyTypesTable =
+    let createRequirementStabilityTypesTable =
         """
         CREATE TABLE requirement_stability_types
         AS 
         SELECT DISTINCT requirement_stability
         FROM _raw;
         """
+        
+    let createRegulatoryComplianceLevelsTable =
+        """
+        CREATE TABLE regulatory_compliance_levels
+        AS 
+        SELECT DISTINCT regulatory_compliance_level
+        FROM _raw;
+        """
+        
+    let Create
     
     let run _ =
         let (rows, errors) =
@@ -62,7 +72,9 @@ module Test =
         ctx.ExecuteSqlNonQuery(createProjectMethodologiesTable) |> ignore
         ctx.ExecuteSqlNonQuery(createTeamExpereinceLevelsTable) |> ignore
         ctx.ExecuteSqlNonQuery(createProjectPhasesTable) |> ignore
-        ctx.ExecuteSqlNonQuery(createRequirementStabilitiyTypesTable) |> ignore
+        ctx.ExecuteSqlNonQuery(createRequirementStabilityTypesTable) |> ignore
+        ctx.ExecuteSqlNonQuery(createRegulatoryComplianceLevelsTable) |> ignore
+        
         
         ()
         
