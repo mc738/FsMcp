@@ -93,7 +93,6 @@ module Test =
         ctx.ExecuteSqlNonQuery(createTechnologyFamiliarityLevelsTable) |> ignore
         ctx.ExecuteSqlNonQuery(createStakeholderEngagementLevelsTable) |> ignore
         
-        ()
         
 
 Test.run ()
