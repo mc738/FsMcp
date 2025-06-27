@@ -37,25 +37,22 @@ module Test =
             """
             """
             INSERT INTO team_experience_levels (name)
-            SELECT DISTINCT eam_experience_level
+            SELECT DISTINCT team_experience_level
             FROM _raw;
             """
         ]
         
-        """
-        CREATE TABLE team_experience_levels
-        AS 
-        SELECT DISTINCT team_experience_level
-        FROM _raw;
-        """
-        
     let createProjectPhasesTable =
-        """
-        CREATE TABLE project_phases
-        AS 
-        SELECT DISTINCT project_phase
-        FROM _raw;
-        """
+        [
+            """
+            CREATE TABLE project_phases (name TEXT NOT NULL);
+            """
+            """
+            INSERT INTO project_phases (name)
+            SELECT DISTINCT project_phase
+            FROM _raw;
+            """
+        ]
         
     let createRequirementStabilityTypesTable =
         """
