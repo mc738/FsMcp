@@ -29,14 +29,19 @@ module Test =
             FROM _raw;
             """
         ]
-        """
-        CREATE TABLE project_methodologies
-        AS 
-        SELECT DISTINCT methodology_used
-        FROM _raw;
-        """
         
-    let createTeamExpereinceLevelsTable =
+    let createTeamExperienceLevelsTable =
+        [
+            """
+            CREATE TABLE team_experience_levels (name TEXT NOT NULL);
+            """
+            """
+            INSERT INTO team_experience_levels (name)
+            SELECT DISTINCT eam_experience_level
+            FROM _raw;
+            """
+        ]
+        
         """
         CREATE TABLE team_experience_levels
         AS 
