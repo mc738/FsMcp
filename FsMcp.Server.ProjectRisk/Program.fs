@@ -7,14 +7,28 @@ module Test =
     
     
     let createProjectTypesTableSql =
-        """
-        CREATE TABLE project_types
-        AS 
-        SELECT DISTINCT project_type
-        FROM _raw;
-        """
+        [
+            """
+            CREATE TABLE project_types (name TEXT NOT NULL);
+            """
+            """
+            INSERT INTO project_types (name)
+            SELECT DISTINCT project_type
+            FROM _raw;
+            """
+        ]
     
     let createProjectMethodologiesTable =
+        [
+            """
+            CREATE TABLE project_methodologies (name TEXT NOT NULL);
+            """
+            """
+            INSERT INTO project_methodologies (name)
+            SELECT DISTINCT methodology_used
+            FROM _raw;
+            """
+        ]
         """
         CREATE TABLE project_methodologies
         AS 
