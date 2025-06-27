@@ -71,6 +71,14 @@ module Test =
         SELECT DISTINCT stakeholder_engagement_level
         FROM _raw;
         """
+        
+    let createStakeholderEngagementLevelsTable =
+        """
+        CREATE TABLE stakeholder_engagement_levels
+        AS 
+        SELECT DISTINCT executive_sponsorship
+        FROM _raw;
+        """
     
     let run _ =
         let (rows, errors) =
