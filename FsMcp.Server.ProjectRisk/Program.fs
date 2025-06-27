@@ -100,6 +100,7 @@ module Test =
         ctx.ExecuteSqlNonQuery(createRegulatoryComplianceLevelsTable) |> ignore
         ctx.ExecuteSqlNonQuery(createTechnologyFamiliarityLevelsTable) |> ignore
         ctx.ExecuteSqlNonQuery(createStakeholderEngagementLevelsTable) |> ignore
+        ctx.ExecuteSqlNonQuery(createExecutiveSponsorshipLevelsTable) |> ignore
         
         
 
