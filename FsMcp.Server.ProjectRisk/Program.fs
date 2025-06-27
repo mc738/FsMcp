@@ -72,9 +72,9 @@ module Test =
         FROM _raw;
         """
         
-    let createStakeholderEngagementLevelsTable =
+    let createExecutiveSponsorshipLevelsTable =
         """
-        CREATE TABLE stakeholder_engagement_levels
+        CREATE TABLE executive_sponsorship_levels
         AS 
         SELECT DISTINCT executive_sponsorship
         FROM _raw;
