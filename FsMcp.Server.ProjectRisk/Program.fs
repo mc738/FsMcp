@@ -56,40 +56,44 @@ module Test =
             """ ]
 
     let createRegulatoryComplianceLevelsTable =
-        [
-            """
+        [ """
             CREATE TABLE regulatory_compliance_levels (name TEXT NOT NULL);
             """
-            """
+          """
             INSERT INTO regulatory_compliance_levels (name)
             SELECT DISTINCT regulatory_compliance_level
             FROM _raw;
-            """
-        ]
+            """ ]
 
     let createTechnologyFamiliarityLevelsTable =
-        """
-        CREATE TABLE technology_familiarity_levels
-        AS 
-        SELECT DISTINCT technology_familiarity
-        FROM _raw;
-        """
+        [ """
+            CREATE TABLE technology_familiarity_levels (name TEXT NOT NULL);
+            """
+          """
+            INSERT INTO technology_familiarity_levels (name)
+            SELECT DISTINCT technology_familiarity
+            FROM _raw;
+            """ ]
 
     let createStakeholderEngagementLevelsTable =
-        """
-        CREATE TABLE stakeholder_engagement_levels
-        AS 
-        SELECT DISTINCT stakeholder_engagement_level
-        FROM _raw;
-        """
+        [ """
+            CREATE TABLE stakeholder_engagement_levels (name TEXT NOT NULL);
+            """
+          """
+            INSERT INTO stakeholder_engagement_levels (name)
+            SELECT DISTINCT stakeholder_engagement_level
+            FROM _raw;
+            """ ]
 
     let createExecutiveSponsorshipLevelsTable =
-        """
-        CREATE TABLE executive_sponsorship_levels
-        AS 
-        SELECT DISTINCT executive_sponsorship
-        FROM _raw;
-        """
+        [ """
+            CREATE TABLE executive_sponsorship_levels (name TEXT NOT NULL);
+            """
+          """
+            INSERT INTO executive_sponsorship_levels (name)
+            SELECT DISTINCT executive_sponsorship
+            FROM _raw;
+            """ ]
 
     let run _ =
         let (rows, errors) =
