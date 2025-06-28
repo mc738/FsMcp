@@ -173,6 +173,62 @@ module Test =
             FROM _raw;
             """ ]
         
+    let createResourceContentionLevelsTable =
+        [ """
+            CREATE TABLE resource_contention_levels (name TEXT NOT NULL);
+            """
+          """
+            INSERT INTO resource_contention_levels (name)
+            SELECT DISTINCT resource_contention_level
+            FROM _raw;
+            """ ]
+        
+        
+    // resource_contention_level
+    // industry_volatility
+    let createIndustryVolatilityLevelsTable =
+        [ """
+            CREATE TABLE industry_volatility_levels (name TEXT NOT NULL);
+            """
+          """
+            INSERT INTO industry_volatility_levels (name)
+            SELECT DISTINCT industry_volatility
+            FROM _raw;
+            """ ]
+    
+    
+    
+    // client_experience_level
+    
+    let createClientExperienceLevelsTable =
+        [ """
+            CREATE TABLE client_experience_levels (name TEXT NOT NULL);
+            """
+          """
+            INSERT INTO client_experience_levels (name)
+            SELECT DISTINCT client_experience_level
+            FROM _raw;
+            """ ]
+    
+    
+    // change_control_maturity
+    
+    
+    let createChangeControlMaturityLevelsTable =
+        [ """
+            CREATE TABLE change_control_maturity_levels (name TEXT NOT NULL);
+            """
+          """
+            INSERT INTO change_control_maturity_levels (name)
+            SELECT DISTINCT change_control_maturity
+            FROM _raw;
+            """ ]
+    
+    // risk_management_maturity
+    // team_colocation
+    // documentation_quality
+    // risk_level
+        
     let run _ =
         let (rows, errors) =
             CsvParser.parseFileV2<RawValue>
@@ -203,7 +259,11 @@ module Test =
               createDataSecurityRequirementsTable
               createKeyStakeholderAvailabilitiesTable
               createTechEnvironmentStabilityLevelsTable
-              createContractTypesTable ]
+              createContractTypesTable
+              createResourceContentionLevelsTable
+              createIndustryVolatilityLevelsTable
+              createClientExperienceLevelsTable
+              createChangeControlMaturityLevelsTable ]
         |> List.iter (fun sql -> ctx.ExecuteSqlNonQuery(sql) |> ignore)
 
 // project_manager_experience
