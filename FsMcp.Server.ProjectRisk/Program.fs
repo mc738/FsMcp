@@ -161,7 +161,18 @@ module Test =
             SELECT DISTINCT tech_environment_stability
             FROM _raw;
             """ ]
-    
+
+    // contract_type
+    let createContractTypesTable =
+        [ """
+            CREATE TABLE contract_types (name TEXT NOT NULL);
+            """
+          """
+            INSERT INTO contract_types (name)
+            SELECT DISTINCT contract_type
+            FROM _raw;
+            """ ]
+        
     let run _ =
         let (rows, errors) =
             CsvParser.parseFileV2<RawValue>
@@ -190,7 +201,9 @@ module Test =
               createProjectManagerExperienceLevelsTable
               createOrgProcessMaturityLevelsTable
               createDataSecurityRequirementsTable
-              createKeyStakeholderSvailabilitiesTable ]
+              createKeyStakeholderAvailabilitiesTable
+              createTechEnvironmentStabilityLevelsTable
+              createContractTypesTable ]
         |> List.iter (fun sql -> ctx.ExecuteSqlNonQuery(sql) |> ignore)
 
 // project_manager_experience
