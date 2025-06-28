@@ -149,8 +149,19 @@ module Test =
             FROM _raw;
             """ ]
         
-        
+    // tech_environment_stability
 
+    
+    let createTechEnvironmentStabilityLevelsTable =
+        [ """
+            CREATE TABLE tech_environment_stability_levels (name TEXT NOT NULL);
+            """
+          """
+            INSERT INTO tech_environment_stability_levels (name)
+            SELECT DISTINCT tech_environment_stability
+            FROM _raw;
+            """ ]
+    
     let run _ =
         let (rows, errors) =
             CsvParser.parseFileV2<RawValue>
