@@ -115,7 +115,7 @@ module Test =
             FROM _raw;
             """ ]
         
-    let createOrgProcessMaturityTable =
+    let createOrgProcessMaturityLevelsTable =
         [ """
             CREATE TABLE org_process_maturity_levels (name TEXT NOT NULL);
             """
@@ -125,6 +125,18 @@ module Test =
             FROM _raw;
             """ ]
 
+    // data_security_requirements
+    
+    let createDataSecurityRequirementsTable =
+        [ """
+            CREATE TABLE data_security_requirements (name TEXT NOT NULL);
+            """
+          """
+            INSERT INTO data_security_requirements (name)
+            SELECT DISTINCT data_security_requirements
+            FROM _raw;
+            """ ]
+    
     let run _ =
         let (rows, errors) =
             CsvParser.parseFileV2<RawValue>
@@ -150,7 +162,9 @@ module Test =
               createStakeholderEngagementLevelsTable
               createExecutiveSponsorshipLevelsTable
               createPriorityLevelsTable
-              createProjectManagerExperienceLevelsTable ]
+              createProjectManagerExperienceLevelsTable
+              createOrgProcessMaturityLevelsTable
+              createDataSecurityRequirementsTable ]
         |> List.iter (fun sql -> ctx.ExecuteSqlNonQuery(sql) |> ignore)
 
     // project_manager_experience
