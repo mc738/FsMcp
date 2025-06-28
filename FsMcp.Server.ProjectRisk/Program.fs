@@ -94,7 +94,7 @@ module Test =
             SELECT DISTINCT executive_sponsorship
             FROM _raw;
             """ ]
-        
+
     let createPriorityLevelsTable =
         [ """
             CREATE TABLE priority_levels (name TEXT NOT NULL);
@@ -104,7 +104,7 @@ module Test =
             SELECT DISTINCT priority_leve
             FROM _raw;
             """ ]
-        
+
     let createProjectManagerExperienceLevelsTable =
         [ """
             CREATE TABLE project_manager_experience_levels (name TEXT NOT NULL);
@@ -114,7 +114,7 @@ module Test =
             SELECT DISTINCT project_manager_experience
             FROM _raw;
             """ ]
-        
+
     let createOrgProcessMaturityLevelsTable =
         [ """
             CREATE TABLE org_process_maturity_levels (name TEXT NOT NULL);
@@ -126,7 +126,7 @@ module Test =
             """ ]
 
     // data_security_requirements
-    
+
     let createDataSecurityRequirementsTable =
         [ """
             CREATE TABLE data_security_requirements (name TEXT NOT NULL);
@@ -136,7 +136,21 @@ module Test =
             SELECT DISTINCT data_security_requirements
             FROM _raw;
             """ ]
-    
+
+    // key_stakeholder_availability
+
+    let createKeyStakeholderAvailabilitiesTable =
+        [ """
+            CREATE TABLE key_stakeholder_availabilities (name TEXT NOT NULL);
+            """
+          """
+            INSERT INTO key_stakeholder_availabilities (name)
+            SELECT DISTINCT key_stakeholder_availability
+            FROM _raw;
+            """ ]
+        
+        
+
     let run _ =
         let (rows, errors) =
             CsvParser.parseFileV2<RawValue>
@@ -164,10 +178,11 @@ module Test =
               createPriorityLevelsTable
               createProjectManagerExperienceLevelsTable
               createOrgProcessMaturityLevelsTable
-              createDataSecurityRequirementsTable ]
+              createDataSecurityRequirementsTable
+              createKeyStakeholderSvailabilitiesTable ]
         |> List.iter (fun sql -> ctx.ExecuteSqlNonQuery(sql) |> ignore)
 
-    // project_manager_experience
+// project_manager_experience
 
 Test.run ()
 
