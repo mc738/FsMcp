@@ -114,6 +114,16 @@ module Test =
             SELECT DISTINCT project_manager_experience
             FROM _raw;
             """ ]
+        
+    let createOrgProcessMaturityTable =
+        [ """
+            CREATE TABLE org_process_maturity_levels (name TEXT NOT NULL);
+            """
+          """
+            INSERT INTO org_process_maturity_levels (name)
+            SELECT DISTINCT org_process_maturity
+            FROM _raw;
+            """ ]
 
     let run _ =
         let (rows, errors) =
@@ -139,7 +149,8 @@ module Test =
               createTechnologyFamiliarityLevelsTable
               createStakeholderEngagementLevelsTable
               createExecutiveSponsorshipLevelsTable
-              createPriorityLevelsTable ]
+              createPriorityLevelsTable
+              createProjectManagerExperienceLevelsTable ]
         |> List.iter (fun sql -> ctx.ExecuteSqlNonQuery(sql) |> ignore)
 
     // project_manager_experience
