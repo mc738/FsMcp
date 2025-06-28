@@ -94,6 +94,26 @@ module Test =
             SELECT DISTINCT executive_sponsorship
             FROM _raw;
             """ ]
+        
+    let createPriorityLevelsTable =
+        [ """
+            CREATE TABLE priority_levels (name TEXT NOT NULL);
+            """
+          """
+            INSERT INTO priority_levels (name)
+            SELECT DISTINCT priority_leve
+            FROM _raw;
+            """ ]
+        
+    let createProjectManagerExperienceLevelsTable =
+        [ """
+            CREATE TABLE project_manager_experience_levels (name TEXT NOT NULL);
+            """
+          """
+            INSERT INTO project_manager_experience_levels (name)
+            SELECT DISTINCT project_manager_experience
+            FROM _raw;
+            """ ]
 
     let run _ =
         let (rows, errors) =
@@ -110,19 +130,20 @@ module Test =
         rows |> List.iter (fun value -> ctx.Insert<RawValue>("_raw", value))
 
         List.concat
-            [
-                createProjectTypesTableSql
-                createProjectMethodologiesTable
-                createTeamExperienceLevelsTable
-                createProjectPhasesTable
-                createRequirementStabilityTypesTable
-                createRegulatoryComplianceLevelsTable
-                createTechnologyFamiliarityLevelsTable
-                createStakeholderEngagementLevelsTable
-                createExecutiveSponsorshipLevelsTable
-            ]
-            |> List.iter (fun sql -> ctx.ExecuteSqlNonQuery(sql) |> ignore)
-        
+            [ createProjectTypesTableSql
+              createProjectMethodologiesTable
+              createTeamExperienceLevelsTable
+              createProjectPhasesTable
+              createRequirementStabilityTypesTable
+              createRegulatoryComplianceLevelsTable
+              createTechnologyFamiliarityLevelsTable
+              createStakeholderEngagementLevelsTable
+              createExecutiveSponsorshipLevelsTable
+              createPriorityLevelsTable ]
+        |> List.iter (fun sql -> ctx.ExecuteSqlNonQuery(sql) |> ignore)
+
+    // project_manager_experience
+
 Test.run ()
 
 // For more information see https://aka.ms/fsharp-console-apps
