@@ -109,18 +109,20 @@ module Test =
 
         rows |> List.iter (fun value -> ctx.Insert<RawValue>("_raw", value))
 
-        ctx.ExecuteSqlNonQuery(createProjectTypesTableSql) |> ignore
-        ctx.ExecuteSqlNonQuery(createProjectMethodologiesTable) |> ignore
-        ctx.ExecuteSqlNonQuery(createTeamExpereinceLevelsTable) |> ignore
-        ctx.ExecuteSqlNonQuery(createProjectPhasesTable) |> ignore
-        ctx.ExecuteSqlNonQuery(createRequirementStabilityTypesTable) |> ignore
-        ctx.ExecuteSqlNonQuery(createRegulatoryComplianceLevelsTable) |> ignore
-        ctx.ExecuteSqlNonQuery(createTechnologyFamiliarityLevelsTable) |> ignore
-        ctx.ExecuteSqlNonQuery(createStakeholderEngagementLevelsTable) |> ignore
-        ctx.ExecuteSqlNonQuery(createExecutiveSponsorshipLevelsTable) |> ignore
-
-
-
+        List.concat
+            [
+                createProjectTypesTableSql
+                createProjectMethodologiesTable
+                createTeamExperienceLevelsTable
+                createProjectPhasesTable
+                createRequirementStabilityTypesTable
+                createRegulatoryComplianceLevelsTable
+                createTechnologyFamiliarityLevelsTable
+                createStakeholderEngagementLevelsTable
+                createExecutiveSponsorshipLevelsTable
+            ]
+            |> List.iter (fun sql -> ctx.ExecuteSqlNonQuery(sql) |> ignore)
+        
 Test.run ()
 
 // For more information see https://aka.ms/fsharp-console-apps
