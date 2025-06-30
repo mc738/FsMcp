@@ -223,7 +223,9 @@ module Test =
             SELECT DISTINCT change_control_maturity
             FROM _raw;
             """ ]
-        
+    
+    
+    // risk_management_maturity
     let createRiskManagementMaturityLevelsTable =
         [ """
             CREATE TABLE risk_management_maturity_levels (name TEXT NOT NULL);
@@ -233,11 +235,39 @@ module Test =
             SELECT DISTINCT risk_management_maturity
             FROM _raw;
             """ ]
+
+    // team_colocation    
+    let createTeamColocationTypesTable =
+        [ """
+            CREATE TABLE team_colocation_types (name TEXT NOT NULL);
+            """
+          """
+            INSERT INTO team_colocation_types (name)
+            SELECT DISTINCT team_colocation
+            FROM _raw;
+            """ ]
     
-    // risk_management_maturity
-    // team_colocation
     // documentation_quality
+    let createDocumentationQualityLevelsTable =
+        [ """
+            CREATE TABLE documentation_quality_levels (name TEXT NOT NULL);
+            """
+          """
+            INSERT INTO documentation_quality_levels (name)
+            SELECT DISTINCT documentation_quality
+            FROM _raw;
+            """ ]
+        
     // risk_level
+    let createRiskLevelsTable =
+        [ """
+            CREATE TABLE risk_levels (name TEXT NOT NULL);
+            """
+          """
+            INSERT INTO risk_levels (name)
+            SELECT DISTINCT risk_level
+            FROM _raw;
+            """ ]
         
     let run _ =
         let (rows, errors) =
@@ -274,7 +304,10 @@ module Test =
               createIndustryVolatilityLevelsTable
               createClientExperienceLevelsTable
               createChangeControlMaturityLevelsTable
-              createRiskManagementMaturityLevelsTable ]
+              createRiskManagementMaturityLevelsTable
+              createTeamColocationTypesTable
+              createDocumentationQualityLevelsTable
+              createRiskLevelsTable ]
         |> List.iter (fun sql -> ctx.ExecuteSqlNonQuery(sql) |> ignore)
 
 // project_manager_experience
