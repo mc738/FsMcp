@@ -223,6 +223,16 @@ module Test =
             SELECT DISTINCT change_control_maturity
             FROM _raw;
             """ ]
+        
+    let createRiskManagementMaturityLevelsTable =
+        [ """
+            CREATE TABLE risk_management_maturity_levels (name TEXT NOT NULL);
+            """
+          """
+            INSERT INTO risk_management_maturity_levels (name)
+            SELECT DISTINCT risk_management_maturity
+            FROM _raw;
+            """ ]
     
     // risk_management_maturity
     // team_colocation
@@ -263,7 +273,8 @@ module Test =
               createResourceContentionLevelsTable
               createIndustryVolatilityLevelsTable
               createClientExperienceLevelsTable
-              createChangeControlMaturityLevelsTable ]
+              createChangeControlMaturityLevelsTable
+              createRiskManagementMaturityLevelsTable ]
         |> List.iter (fun sql -> ctx.ExecuteSqlNonQuery(sql) |> ignore)
 
 // project_manager_experience
