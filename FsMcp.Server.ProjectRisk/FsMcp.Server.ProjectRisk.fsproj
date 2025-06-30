@@ -8,7 +8,8 @@
     <ItemGroup>
         <Compile Include="Data\Store\Persistence.fs" />
         <Compile Include="Data\Preparation\Common.fs" />
-        <Folder Include="Data\Querying\" />
+        <Compile Include="Data\Querying\Common.fs" />
+        <Compile Include="Data\Querying\Impl.fs" />
         <Compile Include="Program.fs" />
     </ItemGroup>
 
