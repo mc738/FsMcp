@@ -4,7 +4,6 @@ open FsMcp.Server.ProjectRisk.Data.Preparation
 
 module Test =
 
-
     let createProjectTypesTableSql =
         [ """
             CREATE TABLE project_types (name TEXT NOT NULL);
@@ -125,8 +124,6 @@ module Test =
             FROM _raw;
             """ ]
 
-    // data_security_requirements
-
     let createDataSecurityRequirementsTable =
         [ """
             CREATE TABLE data_security_requirements (name TEXT NOT NULL);
@@ -136,8 +133,6 @@ module Test =
             SELECT DISTINCT data_security_requirements
             FROM _raw;
             """ ]
-
-    // key_stakeholder_availability
 
     let createKeyStakeholderAvailabilitiesTable =
         [ """
@@ -149,9 +144,6 @@ module Test =
             FROM _raw;
             """ ]
         
-    // tech_environment_stability
-
-    
     let createTechEnvironmentStabilityLevelsTable =
         [ """
             CREATE TABLE tech_environment_stability_levels (name TEXT NOT NULL);
@@ -162,7 +154,6 @@ module Test =
             FROM _raw;
             """ ]
 
-    // contract_type
     let createContractTypesTable =
         [ """
             CREATE TABLE contract_types (name TEXT NOT NULL);
@@ -183,9 +174,6 @@ module Test =
             FROM _raw;
             """ ]
         
-        
-    // resource_contention_level
-    // industry_volatility
     let createIndustryVolatilityLevelsTable =
         [ """
             CREATE TABLE industry_volatility_levels (name TEXT NOT NULL);
@@ -195,10 +183,6 @@ module Test =
             SELECT DISTINCT industry_volatility
             FROM _raw;
             """ ]
-    
-    
-    
-    // client_experience_level
     
     let createClientExperienceLevelsTable =
         [ """
@@ -210,10 +194,6 @@ module Test =
             FROM _raw;
             """ ]
     
-    
-    // change_control_maturity
-    
-    
     let createChangeControlMaturityLevelsTable =
         [ """
             CREATE TABLE change_control_maturity_levels (name TEXT NOT NULL);
@@ -224,8 +204,6 @@ module Test =
             FROM _raw;
             """ ]
     
-    
-    // risk_management_maturity
     let createRiskManagementMaturityLevelsTable =
         [ """
             CREATE TABLE risk_management_maturity_levels (name TEXT NOT NULL);
@@ -236,7 +214,6 @@ module Test =
             FROM _raw;
             """ ]
 
-    // team_colocation    
     let createTeamColocationTypesTable =
         [ """
             CREATE TABLE team_colocation_types (name TEXT NOT NULL);
@@ -247,7 +224,6 @@ module Test =
             FROM _raw;
             """ ]
     
-    // documentation_quality
     let createDocumentationQualityLevelsTable =
         [ """
             CREATE TABLE documentation_quality_levels (name TEXT NOT NULL);
@@ -258,7 +234,6 @@ module Test =
             FROM _raw;
             """ ]
         
-    // risk_level
     let createRiskLevelsTable =
         [ """
             CREATE TABLE risk_levels (name TEXT NOT NULL);
