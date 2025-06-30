@@ -55,6 +55,14 @@ let products =
 
 module Tools =
 
+    
+    type Filters =
+        {
+            RiskFactors: string list
+            TeamLocations: string list
+            FundingTypes: string list
+        }
+    
     [<AbstractClass; Sealed>]
     [<McpServerToolType>]
     type EchoTools private () =
@@ -71,6 +79,11 @@ module Tools =
         [<McpServerTool; Description("Get a list of products based on a tag")>]
         static member GetProducts(test: IMyService, [<Description("The tag to search for")>] tag: string) =
             products |> Seq.filter (fun product -> product.Tags |> List.contains tag)
+
+        [<McpServerTool; Description("Get a list of filters")>]            
+        static member GetFilters(test: IMyService, [<Description("The filters to search for")>] filters: Filters) =
+            //logger.LogInformation($"{filters}")
+            filters
 
 let build _ =
 
